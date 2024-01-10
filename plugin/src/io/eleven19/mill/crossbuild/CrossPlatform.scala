@@ -1,4 +1,6 @@
-package io.github.eleven19.mill.crossbuild
+package io.eleven19.mill.crossbuild
+
+import scala.language.reflectiveCalls
 
 import mill._
 import mill.define.DynamicModule
@@ -6,7 +8,6 @@ import mill.main.BuildInfo
 import mill.scalajslib._
 import mill.scalalib._
 import mill.scalanativelib._
-import scala.language.reflectiveCalls
 
 trait CrossPlatform extends Module with DynamicModule { self =>
 

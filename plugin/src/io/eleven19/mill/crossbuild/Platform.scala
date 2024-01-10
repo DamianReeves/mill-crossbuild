@@ -1,4 +1,4 @@
-package io.github.eleven19.mill.crossbuild
+package io.eleven19.mill.crossbuild
 
 import upickle.default.{ReadWriter => RW, macroRW}
 
