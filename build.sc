@@ -56,7 +56,7 @@ trait Plugin  extends Cross.Module[String]
 trait Publish extends CiReleaseModule {
     def pomSettings = PomSettings(
         description = "A mill plugin for cross-building projects",
-        organization = "io.github.eleven19",
+        organization = "io.eleven19",
         url = "https://github.com/eleven19/mill-crossbuild",
         licenses = Seq(License.`Apache-2.0`),
         versionControl = VersionControl.github("eleven19", "mill-crossbuild"),
