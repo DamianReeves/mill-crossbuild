@@ -19,5 +19,5 @@ jobs:
         env:
           PGP_PASSPHRASE: ${{ secrets.ELEVEN19_IO_PGP_PASSPHRASE }}
           PGP_SECRET: ${{ secrets.ELEVEN19_IO_PGP_SECRET_BASE64 }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.ELEVEN19_SONATYPE_PASSWORD }}
+          SONATYPE_USERNAME: ${{ secrets.ELEVEN19_SONATYPE_USERNAME }}
