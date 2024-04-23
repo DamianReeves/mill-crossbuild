@@ -73,14 +73,14 @@ trait Publish extends CiReleaseModule {
 }
 
 object itest     extends Cross[ItestCross](millVersions)
-trait ItestCross extends MillIntegrationTestModule with Cross.Module[String] {
+trait ItestCross extends MillIntegrationTestModule with Cross.Module[String] { self =>
     // override def millSourcePath: Path = super.millSourcePath / os.up
     def millVersion = crossValue
-    override def millTestVersion: T[String] = millVersion
+    override def millTestVersion: T[String] = self.millVersion
     def pluginsUnderTest = Seq(
-        `plugin`(millVersion)
+        plugin(self.millVersion)
     )
-    def testBase = millSourcePath / "src"
+    // def testBase = millSourcePath / "src"
 }
 
 object MyAliases extends Aliases {
