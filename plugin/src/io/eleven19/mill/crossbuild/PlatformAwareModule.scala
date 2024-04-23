@@ -106,7 +106,7 @@ trait PlatformAwareModule extends JavaModule { self =>
 
     def resolvedPlatform: T[Platform] = T(platform)
 
-    def versionedDirectoryNamesEnabled: T[VersionedDirectoryNamesEnabled] = T(VersionedDirectoryNamesEnabled.Enabled)
+    def versionedDirectoryNamesEnabled: T[VersionedDirectoryNamesEnabled] = T(VersionedDirectoryNamesEnabled.Disabled)
 
     protected def versionedDirectoryNames(
         version:                        ItemVersion,
@@ -119,6 +119,9 @@ trait PlatformAwareModule extends JavaModule { self =>
         : Seq[String] =
         Seq("") ++ version.map(v => versionedDirectoryNames(v, versionedDirectoryNamesEnabled)).getOrElse(Seq.empty)
 
+    override def sources: mill.define.Target[Seq[mill.api.PathRef]] = T.sources {
+        crossPlatformSources()
+    }
 }
 
 trait PlatformAwareScalaModule extends ScalaModule with PlatformAwareModule {
@@ -150,4 +153,10 @@ trait PlatformAwareScalaModule extends ScalaModule with PlatformAwareModule {
     }
 }
 
-trait PlatformAwareCrossScalaModule extends CrossScalaModule with PlatformAwareScalaModule {}
+trait PlatformAwareCrossScalaModule extends CrossScalaModule with PlatformAwareScalaModule {
+    override def versionedDirectoryNamesEnabled: T[VersionedDirectoryNamesEnabled] =
+        T(VersionedDirectoryNamesEnabled.Enabled)
+    override def sources: mill.define.Target[Seq[mill.api.PathRef]] = T.sources {
+        crossPlatformSources()
+    }
+}
