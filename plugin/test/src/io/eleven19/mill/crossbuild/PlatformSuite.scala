@@ -7,4 +7,3 @@ class PlatformSuite extends munit.FunSuite {
         assertEquals(platforms.size, 3)
     }
 }
-
