@@ -1,11 +1,11 @@
 package io.eleven19.mill.crossbuild
 
 import mill._
-import mill.scalalib._
 import mill.scalajslib._
+import mill.scalalib._
+import mill.scalalib.api.ZincWorkerUtil
 import mill.scalanativelib._
 import os.Path
-import mill.scalalib.api.ZincWorkerUtil
 
 /// A platform-aware project that is built for a specific Scala version but possibly for multiple platforms (i.e. JVM, JS, Native)
 trait PlatformAwareScalaProject extends PlatformScalaModule with PlatformAwareScalaModule {}

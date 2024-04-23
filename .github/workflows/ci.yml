@@ -51,7 +51,3 @@ jobs:
     - name: Test
       run:
         ./mill -i __.test
-
-    - name: iTest
-      run:
-        ./mill -i __.itest

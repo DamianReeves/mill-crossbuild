@@ -1,12 +1,12 @@
 package io.eleven19.mill.crossbuild
 
+import io.eleven19.mill.crossbuild.VersionString
 import mill._
-import mill.scalalib._
 import mill.scalajslib._
+import mill.scalalib._
+import mill.scalalib.api.ZincWorkerUtil
 import mill.scalanativelib._
 import os.Path
-import mill.scalalib.api.ZincWorkerUtil
-import io.eleven19.mill.crossbuild.VersionString
 
 trait PlatformAwareModule extends JavaModule { self =>
 
