@@ -1,37 +1,33 @@
-import java.lang.annotation.Native
-import $exec.plugins
+import $file.plugins
 import mill._
-import mill.api.Result
-import mill.define.SelectMode
-import mill.eval._
-import mill.main.MainModule
+import mill.define.Command
 import mill.scalalib._
 import mill.scalajslib._
 import mill.scalanativelib._
-import io.github.eleven19.mill.crossbuild._
+import io.eleven19.mill.crossbuild._
 
-val scalaVersions = Seq("3.3.3", "2.13.12", "2.12.18", "2.11.12")
+object app extends CrossPlatform {
+    trait Shared extends PlatformAwareScalaProject {
+        def scalaVersion = "3.3.3"
+    }
+    object jvm extends ScalaJvmProject with Shared
+    object js extends ScalaJsProject with Shared {
+        def scalaJSVersion = "1.16.0"
+    }
 
-object app extends Cross[AppModule](scalaVersions)
-trait AppModule extends Core.Module[String] with CrossPlatform {
-    trait CommonScalaModule      extends TpolecatModule with ScalafixModule with ScalafmtModule
-    trait CommonCrossScalaModule extends CrossScalaModule with CommonScalaModule with CrossValue
-
-    trait CommonCrossPlatformScalaModule extends CommonCrossScalaModule
-
-    trait CommonJvmModule    extends JvmCrossPlatformScalaModule
-    trait CommonJsModule     extends JsCrossPlatformScalaModule
-    trait CommonNativeModule extends NativeCrossPlatformScalaModule
-
-    trait Shared extends CommonCrossPlatformScalaModule {}
-
-    object jvm    extends Shared with CommonJvmModule
-    object js     extends Shared with CommonJsModule
-    object native extends Shared with CommonNativeModule
-
+    // object native extends ScalaNativeProject with Shared {
+    //     def scalaNativeVersion = "0.5.1"
+    // }
 }
 
-def verify() = T.command {
-    app("3.3.3").jvm.compile()
+def verify(): Command[Unit] = T.command {
+    app.jvm.allSources()
+    app.jvm.compile()
+
+    app.js.allSources()
+    app.js.compile()
+
+    // app.native.allSources()
+    // app.native.compile()
     ()
 }
